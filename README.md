@@ -19,3 +19,41 @@ When you were quick to code the CRUD operations, try to enhance the output for t
 - ✔ You wrote the code to delete two record from the persons table
 - ✔ You attempted to write some bad SQL injection statements
 - ✔ Your code is available on Github/Gitlab
+
+## Preparation of MySQL Database
+
+The database must be prepared with the following SQL statements:
+```
+-- If database not yet exists:
+-- CREATE DATABASE wild;
+USE wild; 
+
+CREATE TABLE persons ( firstname VARCHAR(30), lastname VARCHAR(30), age int );
+INSERT INTO persons ( firstname, lastname, age ) VALUES ( 'John', 'Smith', 31);
+INSERT INTO persons ( firstname, lastname, age ) VALUES ( 'Sarah', 'Connor', 29 );
+```
+
+## Output
+
+The Output of the App then will be:
+```
+Initial content of table PERSONS:
+John    Smith   31
+Sarah   Connor  29
+
+Inserted 2 records:
+John    Smith   31
+Sarah   Connor  29
+Max     Mustermann      55
+Erika   Musterfrau      44
+
+Updated 1 records:
+John    Smith   31
+Sarah   Connor  29
+Max     Musterfrau      55
+Erika   Musterfrau      44
+
+Deleted 2 records:
+John    Smith   31
+Sarah   Connor  29
+```

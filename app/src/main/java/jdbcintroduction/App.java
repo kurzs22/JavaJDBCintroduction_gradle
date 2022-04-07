@@ -46,13 +46,14 @@ public class App {
             return;
         }
 
+        System.out.println("Initial content of table PERSONS:");
         select();
+
         insert();
-        select();
+        
         update();
-        select();
+        
         delete();
-        select();
 
         try {
             connection.close();
@@ -73,8 +74,9 @@ public class App {
                 insertStatement.setInt(3, Integer.parseInt(row[2]) );
                 insertStatement.execute();
             }
-            System.out.println(testData.length + " records inserted.");
+            System.out.println("Inserted " + testData.length + " records:");
             insertStatement.close();
+            select();
         }
         catch (Exception ex) {
             System.err.println("Insert failed! " + ex);
@@ -86,8 +88,9 @@ public class App {
         try {
             Statement updateStatement = connection.createStatement();
             int count = updateStatement.executeUpdate("UPDATE persons SET lastname=\"Musterfrau\" WHERE lastname=\"Mustermann\" ");
-            System.out.println(count + " records updated.");
+            System.out.println("Updated " + count + " records:");
             updateStatement.close();
+            select();
         }
         catch (Exception ex) {
             System.err.println("Update failed! " + ex);
@@ -99,8 +102,9 @@ public class App {
         try {
             Statement deleteStatement = connection.createStatement();
             int count = deleteStatement.executeUpdate("DELETE FROM persons WHERE lastname=\"Musterfrau\" ");
-            System.out.println(count + " records deleted.");
+            System.out.println("Deleted " + count + " records:");
             deleteStatement.close();
+            select();
         }
         catch (Exception ex) {
             System.err.println("Delete failed! " + ex);

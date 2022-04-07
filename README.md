@@ -56,4 +56,9 @@ Erika   Musterfrau      44
 Deleted 2 records:
 John    Smith   31
 Sarah   Connor  29
+
+Table 'persons' has 3 columns:
+1: 'firstname' with type 'VARCHAR' and precision 30
+2: 'lastname' with type 'VARCHAR' and precision 30
+3: 'age' with type 'INT' and precision 10
 ```

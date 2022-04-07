@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.Statement;
 
 public class App {
@@ -54,6 +55,8 @@ public class App {
         update();
         
         delete();
+
+        describe();
 
         try {
             connection.close();
@@ -128,6 +131,30 @@ public class App {
         }
         catch (Exception ex) {
             System.err.println("Query failed! " + ex);
+        }
+    }
+
+    // Describe the persons database table
+    public static void describe() {
+        Statement selectStatement = null;
+        try {
+            selectStatement = connection.createStatement();
+            ResultSet resultSet = selectStatement.executeQuery("SELECT * FROM persons LIMIT 1");
+            ResultSetMetaData rsmd = resultSet.getMetaData();
+            int numberOfColumns = rsmd.getColumnCount();
+
+            System.out.println("Table '" + rsmd.getTableName(1) + "' has " + numberOfColumns + " columns:");
+            for (int i = 1; i <= numberOfColumns; i++) {
+                System.out.println(i + ": '" + rsmd.getColumnName(i)
+                                    + "' with type '" + rsmd.getColumnTypeName(i)
+                                    + "' and precision " + rsmd.getPrecision(i));
+            }
+            resultSet.close();
+            selectStatement.close();
+            System.out.println();
+        }
+        catch (Exception ex) {
+            System.err.println("Describe failed! " + ex);
         }
     }
 }
